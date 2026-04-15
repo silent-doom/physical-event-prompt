@@ -1,0 +1,18 @@
+# Git internals
+.git
+.gitignore
+
+# Don't copy editor/IDE files
+.vscode
+.idea
+*.swp
+
+# macOS artifacts
+.DS_Store
+
+# Logs
+*.log
+
+# NOTE: js/env.js is NOT listed here — it IS copied into the Docker image
+# so that API keys are available at runtime. The image is private/deployed,
+# not pushed to a public container registry with public access.
