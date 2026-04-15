@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EventFlow Wait Times – Live concession stand and restroom wait times across all venue zones." />
+  <meta name="theme-color" content="#070711" />
+  <title>Wait Times – EventFlow</title>
+  <link rel="manifest" href="manifest.json" /><link rel="icon" href="assets/icons/icon-192.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/design-system.css" /><link rel="stylesheet" href="css/nav.css" /><link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header id="navbar" role="banner"></header>
+  <main id="main-content" class="page-main" tabindex="-1">
+    <div class="container">
+      <div class="page-header">
+        <div class="page-header__eyebrow">Real-time Data</div>
+        <div class="flex-between flex-wrap gap-2">
+          <h1 class="page-header__title">Wait Times</h1>
+          <div id="waitLiveBadge"></div>
+        </div>
+        <p class="page-header__subtitle">Live wait times for all concession stands and restroom occupancy across all venue zones.</p>
+      </div>
+
+      <!-- Zone Filter -->
+      <div class="filter-bar" role="group" aria-label="Filter by zone">
+        <span class="text-sm text-muted">Filter by zone:</span>
+        <button class="btn btn-secondary btn-sm filter-btn filter-btn--active" data-zone="all" aria-pressed="true">All Zones</button>
+        <button class="btn btn-ghost btn-sm filter-btn" data-zone="north" aria-pressed="false">🔼 North</button>
+        <button class="btn btn-ghost btn-sm filter-btn" data-zone="east"  aria-pressed="false">▶️ East</button>
+        <button class="btn btn-ghost btn-sm filter-btn" data-zone="south" aria-pressed="false">🔽 South</button>
+        <button class="btn btn-ghost btn-sm filter-btn" data-zone="west"  aria-pressed="false">◀️ West</button>
+      </div>
+
+      <!-- Concession Stands -->
+      <section class="section" aria-labelledby="concessions-heading">
+        <h2 id="concessions-heading" class="section-title">
+          <span aria-hidden="true">🍔</span> Concessions
+        </h2>
+        <div class="grid-auto" id="concessionGrid" role="list" aria-label="Concession stand wait times"></div>
+      </section>
+
+      <!-- Restrooms -->
+      <section class="section" aria-labelledby="restrooms-heading">
+        <h2 id="restrooms-heading" class="section-title">
+          <span aria-hidden="true">🚻</span> Restroom Occupancy
+        </h2>
+        <div class="grid-auto" id="restroomGrid" role="list" aria-label="Restroom occupancy levels"></div>
+      </section>
+
+      <!-- Best Options Banner -->
+      <section class="section" aria-labelledby="best-options-heading">
+        <div class="glass-card glass-card--accent-teal">
+          <h2 id="best-options-heading" class="section-title">
+            <span aria-hidden="true">⚡</span> Smart Recommendations
+          </h2>
+          <div id="bestOptions" aria-live="polite"></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+  <footer role="contentinfo">
+    <div class="container footer__inner">
+      <span class="footer__copy">© 2026 EventFlow</span>
+      <nav class="footer__links" aria-label="Footer"><a href="index.html">← Home</a><a href="parking.html">Parking</a></nav>
+    </div>
+  </footer>
+  <script type="module" src="js/wait-times.js"></script>
+</body>
+</html>

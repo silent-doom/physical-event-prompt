@@ -1,0 +1,35 @@
+# Dependencies (Never committed)
+node_modules/
+.next/
+out/
+dist/
+build/
+
+# Environment (secrets)
+.env
+.env.local
+.env.*.local
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Firebase
+.firebase/
+firebase-debug.log

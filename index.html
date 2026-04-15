@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EventFlow – Smart venue management for large-scale sporting events. Real-time crowd maps, wait times, parking guidance, and more." />
+  <meta name="theme-color" content="#070711" />
+  <meta property="og:title" content="EventFlow – Smart Venue Experience" />
+  <meta property="og:description" content="Navigate large sporting venues with ease. Live crowd maps, wait times, parking, and real-time alerts." />
+  <meta property="og:type" content="website" />
+  <title>EventFlow – Smart Venue Experience</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="assets/icons/icon-192.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/design-system.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/home.css" />
+</head>
+<body>
+  <!-- Skip to main content (Accessibility) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Navbar -->
+  <header id="navbar" role="banner"></header>
+
+  <!-- Main Content -->
+  <main id="main-content" class="page-main" tabindex="-1">
+
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__orb hero__orb--1"></div>
+        <div class="hero__orb hero__orb--2"></div>
+        <div class="hero__orb hero__orb--3"></div>
+      </div>
+      <div class="container hero__content">
+        <div class="hero__eyebrow">
+          <span class="badge badge-live" aria-label="Live event in progress">LIVE</span>
+          <span class="text-muted text-sm" id="heroVenueName"></span>
+        </div>
+        <h1 id="hero-title" class="hero__title">
+          Your Venue,<br>
+          <span class="text-gradient">Smarter & Faster</span>
+        </h1>
+        <p class="hero__subtitle">
+          Real-time crowd maps, instant wait times, smart gate routing, and live alerts —
+          everything you need for a seamless match-day experience.
+        </p>
+        <div class="hero__cta">
+          <a href="crowd-map.html" class="btn btn-primary btn-lg" aria-label="Open live crowd map">
+            <span aria-hidden="true">🗺️</span> Live Crowd Map
+          </a>
+          <a href="wait-times.html" class="btn btn-secondary btn-lg" aria-label="Check current wait times">
+            <span aria-hidden="true">⏱️</span> Check Wait Times
+          </a>
+        </div>
+        <!-- Countdown -->
+        <div class="hero__countdown" aria-live="off">
+          <span class="text-muted text-sm">Kick-Off in</span>
+          <span class="hero__countdown-time" id="countdownTimer" aria-live="polite" aria-label="Time until kick-off">--</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Stats Bar -->
+    <section class="stats-bar" aria-labelledby="stats-bar-heading">
+      <div class="container">
+        <h2 id="stats-bar-heading" class="sr-only">Live Venue Statistics</h2>
+        <div class="stats-bar__inner" role="list">
+          <div class="stats-bar__item" role="listitem">
+            <span class="stats-bar__icon" aria-hidden="true">👥</span>
+            <div>
+              <div class="stats-bar__value" id="statAttendees">–</div>
+              <div class="stats-bar__label">Attendees</div>
+            </div>
+          </div>
+          <div class="stats-bar__item" role="listitem">
+            <span class="stats-bar__icon" aria-hidden="true">🚪</span>
+            <div>
+              <div class="stats-bar__value" id="statGatesOpen">–</div>
+              <div class="stats-bar__label">Gates Open</div>
+            </div>
+          </div>
+          <div class="stats-bar__item" role="listitem">
+            <span class="stats-bar__icon" aria-hidden="true">⏱️</span>
+            <div>
+              <div class="stats-bar__value" id="statAvgWait">–</div>
+              <div class="stats-bar__label">Avg Wait (min)</div>
+            </div>
+          </div>
+          <div class="stats-bar__item" role="listitem">
+            <span class="stats-bar__icon" aria-hidden="true">🅿️</span>
+            <div>
+              <div class="stats-bar__value" id="statParking">–</div>
+              <div class="stats-bar__label">Parking Spots Free</div>
+            </div>
+          </div>
+          <div class="stats-bar__item" role="listitem">
+            <span class="stats-bar__icon" aria-hidden="true">⚠️</span>
+            <div>
+              <div class="stats-bar__value" id="statIncidents">–</div>
+              <div class="stats-bar__label">Active Incidents</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Access Cards -->
+    <section class="section" aria-labelledby="quick-access-heading">
+      <div class="container">
+        <h2 id="quick-access-heading" class="section-title">
+          <span class="section-title__icon" aria-hidden="true">⚡</span> Quick Access
+        </h2>
+        <div class="grid-auto" role="list">
+
+          <!-- Crowd Map -->
+          <article class="quick-card glass-card glass-card--accent-blue animate-fade-in" role="listitem">
+            <a href="crowd-map.html" class="quick-card__link" aria-label="View live crowd heatmap">
+              <div class="quick-card__icon" aria-hidden="true">🗺️</div>
+              <h3 class="quick-card__title">Live Crowd Map</h3>
+              <p class="quick-card__desc">Real-time heatmap showing crowd density across all venue zones</p>
+              <div class="quick-card__status" id="qcMapStatus">
+                <span class="status-dot status-dot--live" aria-hidden="true"></span>
+                Updating live
+              </div>
+            </a>
+          </article>
+
+          <!-- Wait Times -->
+          <article class="quick-card glass-card glass-card--accent-purple animate-fade-in" role="listitem" style="animation-delay:80ms">
+            <a href="wait-times.html" class="quick-card__link" aria-label="Check concession and restroom wait times">
+              <div class="quick-card__icon" aria-hidden="true">⏱️</div>
+              <h3 class="quick-card__title">Wait Times</h3>
+              <p class="quick-card__desc">Concession stands and restroom occupancy across all sectors</p>
+              <div class="quick-card__status" id="qcWaitStatus"></div>
+            </a>
+          </article>
+
+          <!-- Parking -->
+          <article class="quick-card glass-card glass-card--accent-teal animate-fade-in" role="listitem" style="animation-delay:160ms">
+            <a href="parking.html" class="quick-card__link" aria-label="Find parking and navigate to venue">
+              <div class="quick-card__icon" aria-hidden="true">🅿️</div>
+              <h3 class="quick-card__title">Parking & Navigation</h3>
+              <p class="quick-card__desc">Live availability, directions, and zone status for all parking areas</p>
+              <div class="quick-card__status" id="qcParkStatus"></div>
+            </a>
+          </article>
+
+          <!-- Schedule -->
+          <article class="quick-card glass-card glass-card--accent-pink animate-fade-in" role="listitem" style="animation-delay:240ms">
+            <a href="schedule.html" class="quick-card__link" aria-label="View event schedule and find your seat">
+              <div class="quick-card__icon" aria-hidden="true">📅</div>
+              <h3 class="quick-card__title">Schedule & Seat Finder</h3>
+              <p class="quick-card__desc">Today's timeline plus smart gate routing to your seat</p>
+              <div class="quick-card__status" id="qcScheduleStatus"></div>
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Gate Status Summary -->
+    <section class="section" aria-labelledby="gate-status-heading">
+      <div class="container">
+        <div class="flex-between mb-6">
+          <h2 id="gate-status-heading" class="section-title">
+            <span class="section-title__icon" aria-hidden="true">🚪</span> Gate Status
+          </h2>
+          <div id="gateLiveBadge"></div>
+        </div>
+        <div class="grid-3" id="gateStatusGrid" role="list" aria-label="Gate status overview">
+          <!-- rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Active Alerts -->
+    <section class="section" aria-labelledby="alerts-heading">
+      <div class="container">
+        <div class="flex-between mb-6">
+          <h2 id="alerts-heading" class="section-title">
+            <span class="section-title__icon" aria-hidden="true">🔔</span> Active Alerts
+          </h2>
+          <a href="alerts.html" class="btn btn-ghost btn-sm">View all →</a>
+        </div>
+        <div id="alertsList" aria-live="polite" aria-label="Active alerts list"></div>
+      </div>
+    </section>
+
+    <!-- Crowd Density Overview -->
+    <section class="section" aria-labelledby="density-heading">
+      <div class="container">
+        <h2 id="density-heading" class="section-title">
+          <span class="section-title__icon" aria-hidden="true">📊</span> Zone Crowd Density
+        </h2>
+        <div class="grid-4" role="list" aria-label="Crowd density by zone">
+          <div class="glass-card stat-card" role="listitem">
+            <div class="density-zone">
+              <svg width="100" height="100" viewBox="0 0 100 100" aria-hidden="true" id="ringNorth"></svg>
+            </div>
+            <div class="stat-card__label mt-3">North Zone</div>
+          </div>
+          <div class="glass-card stat-card" role="listitem">
+            <div class="density-zone">
+              <svg width="100" height="100" viewBox="0 0 100 100" aria-hidden="true" id="ringEast"></svg>
+            </div>
+            <div class="stat-card__label mt-3">East Zone</div>
+          </div>
+          <div class="glass-card stat-card" role="listitem">
+            <div class="density-zone">
+              <svg width="100" height="100" viewBox="0 0 100 100" aria-hidden="true" id="ringSouth"></svg>
+            </div>
+            <div class="stat-card__label mt-3">South Zone</div>
+          </div>
+          <div class="glass-card stat-card" role="listitem">
+            <div class="density-zone">
+              <svg width="100" height="100" viewBox="0 0 100 100" aria-hidden="true" id="ringWest"></svg>
+            </div>
+            <div class="stat-card__label mt-3">West Zone</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer role="contentinfo">
+    <div class="container footer__inner">
+      <span class="footer__copy">© 2026 EventFlow · Built for PromptWars</span>
+      <nav class="footer__links" aria-label="Footer links">
+        <a href="admin.html">Admin</a>
+        <a href="alerts.html">Alerts</a>
+        <a href="https://firebase.google.com" target="_blank" rel="noopener noreferrer">Firebase</a>
+        <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer">Google Maps</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script type="module" src="js/home.js"></script>
+</body>
+</html>

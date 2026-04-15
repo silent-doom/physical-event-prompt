@@ -1,0 +1,209 @@
+/* ── Shared Page Styles (all pages except home) ───────────────────── */
+
+/* Filter Bar */
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-6);
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+}
+
+.filter-btn--active {
+    background: var(--color-bg-card) !important;
+    border-color: var(--color-accent-blue) !important;
+    color: var(--color-accent-blue) !important;
+}
+
+/* Map Layout (Crowd Map page) */
+.map-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: var(--space-6);
+    align-items: start;
+}
+
+.map-loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+}
+
+@media (max-width: 900px) {
+    .map-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Heatmap Legend */
+.heatmap-legend {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+}
+
+.heatmap-legend__bar {
+    flex: 1;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(90deg, #00ff00, #ffff00, #ff8000, #ff0000);
+}
+
+/* Gate Recommendation Cards */
+.gate-rec-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-3);
+    background: var(--color-bg-card);
+    transition: all var(--transition-base);
+}
+
+.gate-rec-card--top {
+    border-color: rgba(104, 211, 145, 0.35);
+    background: rgba(104, 211, 145, 0.05);
+    box-shadow: 0 0 20px rgba(104, 211, 145, 0.1);
+}
+
+.gate-rec-card__rank {
+    font-size: var(--font-size-xl);
+    flex-shrink: 0;
+    width: 32px;
+    text-align: center;
+}
+
+.gate-rec-card__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.gate-rec-card__name {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+}
+
+.gate-rec-card__wait {
+    font-size: var(--font-size-xs);
+    margin-top: 3px;
+}
+
+/* Sensor Activity */
+.sensor-entry {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: var(--font-size-xs);
+    animation: fadeIn 0.3s ease;
+}
+
+.sensor-entry:last-child {
+    border-bottom: none;
+}
+
+.sensor-entry__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent-teal);
+    flex-shrink: 0;
+    animation: pulse-live 1.5s ease-in-out infinite;
+}
+
+/* Two-col layout (Schedule) */
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: var(--space-8);
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .two-col {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Timeline */
+.timeline {
+    list-style: none;
+    position: relative;
+    padding-left: var(--space-8);
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-border);
+}
+
+.timeline-item {
+    position: relative;
+    padding: var(--space-4) 0 var(--space-4) var(--space-4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.timeline-item:last-child {
+    border-bottom: none;
+}
+
+.timeline-item__dot {
+    position: absolute;
+    left: -26px;
+    top: 20px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-surface);
+    border: 2px solid var(--color-border);
+    border-radius: 50%;
+    font-size: var(--font-size-base);
+    z-index: 1;
+}
+
+.timeline-item--active .timeline-item__dot {
+    border-color: var(--color-accent-blue);
+    background: rgba(99, 179, 237, 0.15);
+    box-shadow: 0 0 15px rgba(99, 179, 237, 0.3);
+}
+
+.timeline-item--completed .timeline-item__dot {
+    border-color: var(--color-success);
+    background: rgba(104, 211, 145, 0.1);
+    opacity: 0.6;
+}
+
+.timeline-item--upcoming {
+    opacity: 0.65;
+}
+
+.timeline-item__time {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+}
+
+.timeline-item__event {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+}

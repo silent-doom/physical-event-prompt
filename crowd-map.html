@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EventFlow Live Crowd Map – Real-time heatmap showing crowd density across all venue zones with smart gate routing recommendations." />
+  <meta name="theme-color" content="#070711" />
+  <title>Live Crowd Map – EventFlow</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="assets/icons/icon-192.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/design-system.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header id="navbar" role="banner"></header>
+
+  <main id="main-content" class="page-main" tabindex="-1">
+    <div class="container">
+
+      <div class="page-header">
+        <div class="page-header__eyebrow">Real-time Monitoring</div>
+        <div class="flex-between flex-wrap gap-2">
+          <h1 class="page-header__title">Live Crowd Map</h1>
+          <div id="mapLiveBadge"></div>
+        </div>
+        <p class="page-header__subtitle">
+          Crowd density heatmap powered by Google Maps. Zones update every 30 seconds.
+          Recommended gates are ranked by current queue size.
+        </p>
+      </div>
+
+      <!-- Alert banner -->
+      <div class="alert alert-warning mb-6" role="alert" id="congestionBanner" aria-live="assertive">
+        <span class="alert__icon" aria-hidden="true">⚠️</span>
+        <span id="congestionMessage">Checking density...</span>
+      </div>
+
+      <div class="map-layout">
+        <!-- Map Column -->
+        <section class="map-column" aria-labelledby="map-section-heading">
+          <h2 id="map-section-heading" class="section-title">
+            <span aria-hidden="true">🗺️</span> Venue Heatmap
+          </h2>
+
+          <!-- Legend -->
+          <div class="heatmap-legend" role="img" aria-label="Heatmap color legend: green is low density, red is high density">
+            <span class="text-xs text-muted">Low</span>
+            <div class="heatmap-legend__bar" aria-hidden="true"></div>
+            <span class="text-xs text-muted">High</span>
+          </div>
+
+          <!-- Map -->
+          <div class="map-container map-container--lg" id="crowdMap"
+               role="application" aria-label="Interactive crowd heatmap of venue">
+            <div class="map-loading" id="mapLoading">
+              <div class="spinner" aria-hidden="true"></div>
+              <span>Loading map…</span>
+            </div>
+          </div>
+
+          <!-- Zone Density Bars -->
+          <div class="section mt-6" aria-labelledby="zone-density-heading">
+            <h2 id="zone-density-heading" class="section-title">
+              <span aria-hidden="true">📊</span> Zone Density
+            </h2>
+            <div id="zoneDensityChart" aria-label="Zone density chart"></div>
+          </div>
+        </section>
+
+        <!-- Sidebar -->
+        <aside class="map-sidebar" aria-labelledby="gate-rec-heading">
+          <h2 id="gate-rec-heading" class="section-title">
+            <span aria-hidden="true">🚪</span> Recommended Gates
+          </h2>
+          <p class="text-sm text-muted mb-4">Sorted by lowest wait time. Choose any highlighted gate.</p>
+          <div id="gateRecommendations" role="list" aria-label="Gate recommendations by wait time"></div>
+
+          <div class="divider"></div>
+
+          <h3 class="section-title mt-4">
+            <span aria-hidden="true">📡</span> Sensor Activity
+          </h3>
+          <div id="sensorActivity" aria-live="polite" aria-label="Real-time sensor activity log"></div>
+        </aside>
+      </div>
+
+    </div>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container footer__inner">
+      <span class="footer__copy">© 2026 EventFlow · Powered by Google Maps Platform</span>
+      <nav class="footer__links" aria-label="Footer links">
+        <a href="index.html">← Home</a>
+        <a href="wait-times.html">Wait Times</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script type="module" src="js/crowd-map.js"></script>
+</body>
+</html>

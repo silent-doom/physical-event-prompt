@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EventFlow Parking – Live parking availability and navigation for all venue parking zones." />
+  <meta name="theme-color" content="#070711" />
+  <title>Parking – EventFlow</title>
+  <link rel="manifest" href="manifest.json" /><link rel="icon" href="assets/icons/icon-192.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/design-system.css" /><link rel="stylesheet" href="css/nav.css" /><link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header id="navbar" role="banner"></header>
+  <main id="main-content" class="page-main" tabindex="-1">
+    <div class="container">
+      <div class="page-header">
+        <div class="page-header__eyebrow">Navigation & Availability</div>
+        <div class="flex-between flex-wrap gap-2">
+          <h1 class="page-header__title">Parking</h1>
+          <div id="parkLiveBadge"></div>
+        </div>
+        <p class="page-header__subtitle">Live parking availability across all zones. Click "Navigate" to open Google Maps directions.</p>
+      </div>
+
+      <!-- Parking Map -->
+      <div class="map-container mb-6" id="parkingMap"
+           role="application" aria-label="Interactive parking map showing zone availability">
+        <div class="map-loading" id="mapLoading">
+          <div class="spinner" aria-hidden="true"></div>
+          <span>Loading parking map…</span>
+        </div>
+      </div>
+
+      <!-- Parking Zones Grid -->
+      <section aria-labelledby="parking-zones-heading">
+        <h2 id="parking-zones-heading" class="section-title">
+          <span aria-hidden="true">🅿️</span> Parking Zones
+        </h2>
+        <div class="grid-2" id="parkingGrid" role="list" aria-label="Parking zone availability"></div>
+      </section>
+
+      <!-- Tips -->
+      <div class="alert alert-info mt-6" role="note">
+        <span class="alert__icon" aria-hidden="true">ℹ️</span>
+        <span>Arrive 90+ minutes before kick-off for best parking availability. Lot A (North) typically fills last.</span>
+      </div>
+    </div>
+  </main>
+  <footer role="contentinfo">
+    <div class="container footer__inner">
+      <span class="footer__copy">© 2026 EventFlow · Powered by Google Maps</span>
+      <nav class="footer__links" aria-label="Footer"><a href="index.html">← Home</a><a href="crowd-map.html">Live Map</a></nav>
+    </div>
+  </footer>
+  <script type="module" src="js/parking.js"></script>
+</body>
+</html>
