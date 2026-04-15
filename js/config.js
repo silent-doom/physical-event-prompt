@@ -1,25 +1,26 @@
 /**
- * EventFlow - Firebase Configuration
- * Uses Firebase JS SDK v9 (modular) via CDN ESM bundle
- * All keys are demo/public config — secured by Firebase Security Rules
+ * EventFlow - Configuration
+ * Secrets are loaded from js/env.js (gitignored).
+ * Copy js/env.example.js → js/env.js and fill in your real values.
  */
+import { ENV } from './env.js';
 
 // ─── Firebase App Config ───────────────────────────────────────────────────
-// Replace with your actual Firebase project values
+// Values are loaded from js/env.js (gitignored — never commit real keys here)
 export const FIREBASE_CONFIG = {
-  apiKey:            "AIzaSyDEMO_REPLACE_WITH_REAL_KEY",
-  authDomain:        "eventflow-venue.firebaseapp.com",
-  databaseURL:       "https://eventflow-venue-default-rtdb.firebaseio.com",
-  projectId:         "eventflow-venue",
-  storageBucket:     "eventflow-venue.appspot.com",
-  messagingSenderId: "123456789012",
-  appId:             "1:123456789012:web:abcdef1234567890",
-  measurementId:     "G-XXXXXXXX"
+  apiKey:            ENV.FIREBASE_API_KEY,
+  authDomain:        ENV.FIREBASE_AUTH_DOMAIN,
+  databaseURL:       ENV.FIREBASE_DATABASE_URL,
+  projectId:         ENV.FIREBASE_PROJECT_ID,
+  storageBucket:     ENV.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: ENV.FIREBASE_MESSAGING_SENDER_ID,
+  appId:             ENV.FIREBASE_APP_ID,
+  measurementId:     ENV.FIREBASE_MEASUREMENT_ID,
 };
 
 // ─── Google Maps API Key ────────────────────────────────────────────────────
-// Replace with your restricted Maps JS API key
-export const MAPS_API_KEY = "YOUR_GOOGLE_MAPS_API_KEY";
+// Loaded from js/env.js — restrict this key to your domain in Cloud Console
+export const MAPS_API_KEY = ENV.MAPS_API_KEY;
 
 // ─── Venue Configuration ───────────────────────────────────────────────────
 export const VENUE = {

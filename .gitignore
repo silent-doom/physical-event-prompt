@@ -1,3 +1,6 @@
+# API Keys & Secrets (NEVER commit real keys)
+js/env.js
+
 # Dependencies (Never committed)
 node_modules/
 .next/
