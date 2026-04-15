@@ -1,0 +1,315 @@
+/* ── Home Page Styles ─────────────────────────── */
+
+/* Hero */
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: var(--space-16) 0 var(--space-12);
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+}
+
+.hero__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+}
+
+.hero__orb--1 {
+    width: 500px;
+    height: 500px;
+    background: rgba(102, 126, 234, 0.5);
+    top: -200px;
+    left: -100px;
+    animation: float1 12s ease-in-out infinite;
+}
+
+.hero__orb--2 {
+    width: 400px;
+    height: 400px;
+    background: rgba(79, 209, 197, 0.3);
+    top: 50px;
+    right: -100px;
+    animation: float2 15s ease-in-out infinite;
+}
+
+.hero__orb--3 {
+    width: 300px;
+    height: 300px;
+    background: rgba(246, 135, 179, 0.2);
+    bottom: -100px;
+    left: 40%;
+    animation: float3 10s ease-in-out infinite;
+}
+
+@keyframes float1 {
+
+    0%,
+    100% {
+        transform: translate(0, 0)
+    }
+
+    50% {
+        transform: translate(30px, -20px)
+    }
+}
+
+@keyframes float2 {
+
+    0%,
+    100% {
+        transform: translate(0, 0)
+    }
+
+    50% {
+        transform: translate(-20px, 30px)
+    }
+}
+
+@keyframes float3 {
+
+    0%,
+    100% {
+        transform: translate(0, 0)
+    }
+
+    50% {
+        transform: translate(20px, -15px)
+    }
+}
+
+.hero__content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.hero__title {
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: var(--space-5);
+    max-width: 700px;
+}
+
+.hero__subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    max-width: 540px;
+    margin-bottom: var(--space-8);
+    line-height: 1.7;
+}
+
+.hero__cta {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-6);
+}
+
+.hero__countdown {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-5);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+}
+
+.hero__countdown-time {
+    font-size: var(--font-size-xl);
+    font-weight: 800;
+    background: var(--gradient-blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Stats Bar */
+.stats-bar {
+    background: rgba(255, 255, 255, 0.025);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-5) 0;
+    margin-top: 0;
+}
+
+.stats-bar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+}
+
+.stats-bar__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.stats-bar__icon {
+    font-size: var(--font-size-2xl);
+}
+
+.stats-bar__value {
+    font-size: var(--font-size-xl);
+    font-weight: 800;
+    color: var(--color-text-primary);
+}
+
+.stats-bar__label {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Quick Cards */
+.quick-card {
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    cursor: pointer;
+}
+
+.quick-card:hover {
+    transform: translateY(-4px);
+}
+
+.quick-card__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+}
+
+.quick-card__icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-3);
+}
+
+.quick-card__title {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+}
+
+.quick-card__desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-4);
+}
+
+.quick-card__status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+}
+
+/* Gate Status Cards */
+.gate-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+}
+
+.gate-card__icon {
+    font-size: 1.5rem;
+}
+
+.gate-card__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.gate-card__name {
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+}
+
+.gate-card__wait {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    margin-top: 2px;
+}
+
+.gate-card__meter {
+    margin-top: var(--space-2);
+}
+
+/* Alerts List */
+.alert-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-3);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-card);
+    animation: fadeIn 0.3s ease;
+}
+
+.alert-list-item__icon {
+    font-size: var(--font-size-xl);
+    flex-shrink: 0;
+}
+
+.alert-list-item__title {
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+}
+
+.alert-list-item__body {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    margin-top: 2px;
+}
+
+.alert-list-item__meta {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    margin-top: var(--space-1);
+}
+
+.alert-list-item--danger {
+    border-left: 3px solid var(--color-danger);
+}
+
+.alert-list-item--warning {
+    border-left: 3px solid var(--color-warning);
+}
+
+.alert-list-item--info {
+    border-left: 3px solid var(--color-info);
+}
+
+.alert-list-item--success {
+    border-left: 3px solid var(--color-success);
+}
+
+/* Density rings */
+.density-zone {
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EventFlow – Test Runner</title>
+  <link rel="stylesheet" href="../css/design-system.css" />
+  <style>
+    .test-summary { display:flex; gap:24px; margin:24px 0; flex-wrap:wrap; }
+    .test-summary__item { padding:12px 24px; border-radius:12px; font-weight:700; font-size:1.5rem; }
+    .test-summary__item--pass { background:rgba(104,211,145,0.15);color:var(--color-success);border:1px solid rgba(104,211,145,0.3); }
+    .test-summary__item--fail { background:rgba(252,129,129,0.15);color:var(--color-danger);border:1px solid rgba(252,129,129,0.3); }
+    .test-group { margin-bottom:16px; }
+    .test-group__title { font-weight:700; font-size:1rem; margin-bottom:8px; border-bottom:1px solid var(--color-border); padding-bottom:8px; }
+    .test-case { display:flex; align-items:flex-start; gap:8px; padding:6px 0; font-size:14px; }
+    .test-case--pass { color:var(--color-success); }
+    .test-case--fail { color:var(--color-danger); }
+    .test-case__icon { flex-shrink:0; }
+    .test-case__error { margin-top:4px; font-size:11px; color:var(--color-text-muted); font-family:monospace; }
+  </style>
+</head>
+<body>
+  <div class="container" style="padding-top:48px">
+    <h1 style="font-size:2rem;font-weight:900;margin-bottom:8px">⚡ EventFlow Test Runner</h1>
+    <p class="text-muted">In-browser test suite · No Node.js required</p>
+    <div class="test-summary" id="summary"></div>
+    <div id="results"></div>
+  </div>
+  <script type="module">
+    import { runTests, results } from './eventflow.test.js';
+    const { pass, fail, total } = runTests();
+
+    // Summary
+    document.getElementById('summary').innerHTML = `
+      <div class="test-summary__item test-summary__item--pass">✅ ${pass} passed</div>
+      ${fail ? `<div class="test-summary__item test-summary__item--fail">❌ ${fail} failed</div>` : ''}
+      <div style="display:flex;align-items:center;font-size:1rem;color:var(--color-text-muted)">${total} total tests</div>
+    `;
+
+    // Group by test suite
+    const groups = {};
+    results.forEach(r => {
+      if (!groups[r.group]) groups[r.group] = [];
+      groups[r.group].push(r);
+    });
+
+    const container = document.getElementById('results');
+    Object.entries(groups).forEach(([group, cases]) => {
+      const div = document.createElement('div');
+      div.className = 'glass-card test-group';
+      div.innerHTML = `
+        <div class="test-group__title">${group}</div>
+        ${cases.map(c => `
+          <div class="test-case test-case--${c.pass ? 'pass' : 'fail'}">
+            <span class="test-case__icon">${c.pass ? '✅' : '❌'}</span>
+            <div>
+              <span>${c.desc}</span>
+              ${!c.pass && c.error ? `<div class="test-case__error">${c.error}</div>` : ''}
+            </div>
+          </div>
+        `).join('')}
+      `;
+      container.appendChild(div);
+    });
+  </script>
+</body>
+</html>

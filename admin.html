@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EventFlow Admin – Real-time operations dashboard for venue staff and management." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#070711" />
+  <title>Admin Dashboard – EventFlow</title>
+  <link rel="icon" href="assets/icons/icon-192.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/design-system.css" /><link rel="stylesheet" href="css/nav.css" /><link rel="stylesheet" href="css/pages.css" /><link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header id="navbar" role="banner"></header>
+
+  <!-- Auth Gate -->
+  <div id="authGate" class="auth-gate" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="glass-card auth-card">
+      <div style="font-size:2.5rem;margin-bottom:var(--space-4);text-align:center">🛡️</div>
+      <h1 id="authTitle" style="text-align:center;margin-bottom:var(--space-2)">Admin Login</h1>
+      <p class="text-muted text-sm text-center mb-4">Venue operations staff only</p>
+      <form id="loginForm" novalidate aria-label="Admin login form">
+        <div class="form-group">
+          <label for="adminEmail">Email</label>
+          <input type="email" class="input" id="adminEmail" placeholder="admin@venue.com" autocomplete="email" aria-required="true" />
+        </div>
+        <div class="form-group">
+          <label for="adminPass">Password</label>
+          <input type="password" class="input" id="adminPass" placeholder="••••••••" autocomplete="current-password" aria-required="true" />
+        </div>
+        <div id="loginError" class="text-xs" style="color:var(--color-danger);margin-bottom:var(--space-3);min-height:16px" role="alert" aria-live="polite"></div>
+        <button type="submit" class="btn btn-primary w-full" id="loginBtn">
+          <span aria-hidden="true">🔐</span> Sign In
+        </button>
+      </form>
+      <p class="text-xs text-muted text-center mt-3">Demo: admin@venue.com / admin123</p>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <main id="main-content" class="page-main admin-main" tabindex="-1" hidden>
+    <div class="admin-layout">
+
+      <!-- Sidebar -->
+      <nav class="admin-sidebar" aria-label="Admin navigation">
+        <div class="admin-sidebar__header">
+          <div style="font-size:1.5rem">⚡</div>
+          <div>
+            <div style="font-weight:700;font-size:var(--font-size-sm)">EventFlow</div>
+            <div class="text-xs text-muted">Operations</div>
+          </div>
+        </div>
+        <div class="admin-sidebar__links">
+          <button class="admin-nav-btn admin-nav-btn--active" data-panel="overview"  aria-pressed="true">📊 Overview</button>
+          <button class="admin-nav-btn" data-panel="gates"    aria-pressed="false">🚪 Gates</button>
+          <button class="admin-nav-btn" data-panel="staff"    aria-pressed="false">👥 Staff</button>
+          <button class="admin-nav-btn" data-panel="incidents"aria-pressed="false">⚠️ Incidents</button>
+          <button class="admin-nav-btn" data-panel="concessions" aria-pressed="false">🍔 Concessions</button>
+        </div>
+        <button class="btn btn-ghost btn-sm admin-sidebar__logout" id="logoutBtn" style="margin-top:auto">Sign Out</button>
+      </nav>
+
+      <!-- Main Panel -->
+      <div class="admin-content">
+
+        <!-- Overview Panel -->
+        <section id="panel-overview" class="admin-panel" aria-label="Overview dashboard">
+          <div class="flex-between mb-6">
+            <h1 style="font-size:var(--font-size-2xl);font-weight:800">Operations Overview</h1>
+            <div id="adminLiveBadge"></div>
+          </div>
+
+          <!-- KPI Grid -->
+          <div class="grid-4 mb-8" role="list" aria-label="Key performance indicators" id="kpiGrid"></div>
+
+          <!-- Two-col panels -->
+          <div class="admin-grid-2">
+            <div class="glass-card">
+              <h2 class="section-title mb-4"><span aria-hidden="true">🚪</span> Gate Queue Chart</h2>
+              <div id="adminGateChart"></div>
+            </div>
+            <div class="glass-card">
+              <h2 class="section-title mb-4"><span aria-hidden="true">⚠️</span> Active Incidents</h2>
+              <div id="adminIncidentSummary" aria-live="polite"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Gates Panel -->
+        <section id="panel-gates" class="admin-panel" hidden aria-label="Gate management">
+          <h1 style="font-size:var(--font-size-2xl);font-weight:800;margin-bottom:var(--space-6)">Gate Management</h1>
+          <div class="table-wrapper">
+            <table aria-label="Gate status and controls">
+              <thead>
+                <tr>
+                  <th scope="col">Gate</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Queue</th>
+                  <th scope="col">Wait</th>
+                  <th scope="col">Staff</th>
+                  <th scope="col">Control</th>
+                </tr>
+              </thead>
+              <tbody id="gatesTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Staff Panel -->
+        <section id="panel-staff" class="admin-panel" hidden aria-label="Staff management">
+          <h1 style="font-size:var(--font-size-2xl);font-weight:800;margin-bottom:var(--space-6)">Staff Dispatch</h1>
+          <div class="table-wrapper">
+            <table aria-label="Staff roster and dispatch">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Zone</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody id="staffTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Incidents Panel -->
+        <section id="panel-incidents" class="admin-panel" hidden aria-label="Incident management">
+          <div class="flex-between mb-6">
+            <h1 style="font-size:var(--font-size-2xl);font-weight:800">Incident Reports</h1>
+            <button class="btn btn-danger btn-sm" id="newIncidentBtn"><span aria-hidden="true">+</span> New Incident</button>
+          </div>
+          <div id="incidentList" aria-live="polite" aria-label="Incident list"></div>
+        </section>
+
+        <!-- Concessions Panel -->
+        <section id="panel-concessions" class="admin-panel" hidden aria-label="Concession management">
+          <h1 style="font-size:var(--font-size-2xl);font-weight:800;margin-bottom:var(--space-6)">Concession Management</h1>
+          <div class="table-wrapper">
+            <table aria-label="Concession stand management">
+              <thead>
+                <tr>
+                  <th scope="col">Stand</th>
+                  <th scope="col">Zone</th>
+                  <th scope="col">Wait (min)</th>
+                  <th scope="col">Stock %</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Control</th>
+                </tr>
+              </thead>
+              <tbody id="concessionsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>

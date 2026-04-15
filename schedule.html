@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EventFlow Schedule – Today's event timeline and smart seat-to-gate routing." />
+  <meta name="theme-color" content="#070711" />
+  <title>Schedule – EventFlow</title>
+  <link rel="manifest" href="manifest.json" /><link rel="icon" href="assets/icons/icon-192.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/design-system.css" /><link rel="stylesheet" href="css/nav.css" /><link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header id="navbar" role="banner"></header>
+  <main id="main-content" class="page-main" tabindex="-1">
+    <div class="container">
+      <div class="page-header">
+        <div class="page-header__eyebrow">Match Day</div>
+        <h1 class="page-header__title">Schedule &amp; Seat Finder</h1>
+        <p class="page-header__subtitle">Today's event timeline and smart gate routing to find the fastest way to your seat.</p>
+      </div>
+
+      <div class="two-col">
+        <!-- Schedule Timeline -->
+        <section aria-labelledby="timeline-heading">
+          <h2 id="timeline-heading" class="section-title">
+            <span aria-hidden="true">📅</span> Today's Timeline
+          </h2>
+          <ol class="timeline" id="scheduleTimeline" aria-label="Event schedule timeline"></ol>
+        </section>
+
+        <!-- Seat Finder -->
+        <aside aria-labelledby="seat-finder-heading">
+          <h2 id="seat-finder-heading" class="section-title">
+            <span aria-hidden="true">💺</span> Seat Finder
+          </h2>
+          <div class="glass-card">
+            <p class="text-sm text-muted mb-4">Enter your seat details to get smart gate routing with estimated walk time.</p>
+            <form id="seatFinderForm" novalidate aria-label="Seat finder form">
+              <div class="form-group">
+                <label for="sectionInput">Section / Stand</label>
+                <select class="input select" id="sectionInput" aria-required="true">
+                  <option value="">Choose section…</option>
+                  <option value="north">North Stand</option>
+                  <option value="east">East Block</option>
+                  <option value="south">South Stand</option>
+                  <option value="west">West Block</option>
+                  <option value="vip">VIP / Premium</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="rowInput">Row</label>
+                <input type="text" class="input" id="rowInput" placeholder="e.g. A, B, 12" maxlength="5" aria-required="true" />
+              </div>
+              <div class="form-group">
+                <label for="seatInput">Seat Number</label>
+                <input type="number" class="input" id="seatInput" placeholder="e.g. 14" min="1" max="200" aria-required="true" />
+              </div>
+              <button type="submit" class="btn btn-primary w-full" id="findSeatBtn">
+                <span aria-hidden="true">🔍</span> Find Best Gate
+              </button>
+            </form>
+            <div id="seatResult" class="mt-4" aria-live="polite" aria-atomic="true"></div>
+          </div>
+
+          <!-- QR Ticket Scan (mock) -->
+          <div class="glass-card mt-4">
+            <h3 style="font-size:var(--font-size-base);font-weight:700;margin-bottom:var(--space-3)">
+              <span aria-hidden="true">📱</span> Scan Ticket
+            </h3>
+            <p class="text-sm text-muted mb-4">Scan your ticket QR code for automatic gate routing.</p>
+            <button class="btn btn-secondary w-full" id="scanTicketBtn" aria-label="Open ticket QR code scanner">
+              <span aria-hidden="true">📷</span> Open Scanner
+            </button>
+            <div id="scanResult" class="mt-3 text-xs text-muted" aria-live="polite"></div>
+          </div>
+        </aside>
+      </div>
+
+    </div>
+  </main>
+  <footer role="contentinfo">
+    <div class="container footer__inner">
+      <span class="footer__copy">© 2026 EventFlow</span>
+      <nav class="footer__links" aria-label="Footer"><a href="index.html">← Home</a><a href="alerts.html">Alerts</a></nav>
+    </div>
+  </footer>
+  <script type="module" src="js/schedule.js"></script>
+</body>
+</html>
